@@ -44,12 +44,13 @@ const OrderList = ( { orders, user, dispatch } ) => {
 								ADDRESS: {order.address}
 							</Typography>
 
-							{order.images.map( ( img, index ) =>(
-								<img
-									key={index}
-									className={classes.imagePreview}
-									src={img.dataURL}/>
-							) )}
+							{order.images.map( ( img, index ) =>{
+								return img && img.dataURL?
+									<img
+										key={index}
+										className={classes.imagePreview}
+										src={img.dataURL}/> : undefined;
+							} )}
 						</CardContent>
 					</Card> ) : undefined;
 			} )}
