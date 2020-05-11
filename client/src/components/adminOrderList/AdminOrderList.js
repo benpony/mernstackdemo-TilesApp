@@ -28,7 +28,7 @@ const AdminOrderList = ( { orders, admin, dispatch } ) => {
 	return (
 		<div className={classes.root}>
 			{admin.users.map( user => (
-				<>
+				<div key={user.uuid}>
 					<Typography
 						className={classes.title}
 						color="textSecondary"
@@ -37,7 +37,7 @@ const AdminOrderList = ( { orders, admin, dispatch } ) => {
 					</Typography>
 
 					<OrderList orders={orders}/>
-				</>
+				</div>
 			) )}
 		</div>
 	);
