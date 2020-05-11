@@ -1,0 +1,19 @@
+.framedImageContainer {
+  position: relative;
+}
+
+.frame {
+  border: 1px dotted grey;
+  border-radius: 5px;
+  height: 282px;
+  width:282px;
+}
+
+.inner-image {
+  position: absolute;
+  top: 11px;
+  left: 2px;
+  margin: 46px 0 0 0;
+  height: 280px;
+  width: 280px;
+}

@@ -1,0 +1,24 @@
+.app {
+	display: grid;
+	grid-template-rows: auto 60px;
+	grid-template-columns: 1fr;
+	height: 100vh;
+}
+
+.main{
+	overflow: auto;
+}
+
+.footer {
+	text-align: center;
+	grid-column-start: 1;
+	grid-column-end:   3;
+}
+
+.link > *{
+	color:grey;
+	font-size: smaller;
+	font-weight: bolder;
+	display: block;
+	margin: 0 10px 0 10px;
+}

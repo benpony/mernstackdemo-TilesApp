@@ -1,0 +1,26 @@
+{
+  "name": "mern-stack",
+  "version": "1.0.0",
+  "description": "serverside",
+  "keywords": [],
+  "license": "ISC",
+  "author": "Ben Pony",
+  "main": "server.js",
+  "scripts": {
+    "lint": "eslint ./src --ext .js",
+    "debug": "nodemon --inspect server.js",
+    "dev": "nodemon server.js",
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongodb": "^3.5.7"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-plugin-json-format": "^2.0.1",
+    "nodemon": "^2.0.3"
+  }
+}

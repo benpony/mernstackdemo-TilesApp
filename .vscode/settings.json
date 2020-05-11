@@ -1,0 +1,21 @@
+{
+    "editor.formatOnSave": false,
+    "eslint.lintTask.enable": true,
+    "eslint.workingDirectories": [
+        "./client",
+        "./server"
+    ],
+    "eslint.validate": [
+        "json",
+        "javascript",
+        "javascriptreact",
+    ],
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true,
+    },
+    "editor.codeActionsOnSaveTimeout": 5000,
+    "cSpell.words": [
+        "secretpassword"
+    ],
+    "eslint.enable": true
+}
