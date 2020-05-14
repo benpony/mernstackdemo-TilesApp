@@ -22,6 +22,7 @@ module.exports = {
         "space-in-parens": ["error", "always"],
         "no-trailing-spaces": "error",
         "no-multi-spaces": "error",
+        "no-mixed-spaces-and-tabs": "error",
         "react/no-unused-prop-types": 0,
         "react/prop-types": [1,{ ignore:["dispatch"] }],
         "react/jsx-uses-react": "error",   

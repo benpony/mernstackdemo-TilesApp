@@ -33,42 +33,45 @@ const ImagesWall = ( { user, dispatch, history } ) => {
 			images
 		};
 		dispatch( createUserOrder( user ) );
-		setTimeout( ()=>{history.push( "/orders" );}, 3000 );
+		setTimeout( ()=>{history.push( "/orders" );}, 4000 );
 	};
 
 	const isItemsSelected = array => Array.isArray( array ) && array.length;
 	const isOrderComplete = images => isItemsSelected( images ) && user.order.address;
 
 	return (
-		<div className={classes.center}>
-			<Grid
-				className={classes.root}
-				container
-				direction="row"
-				justify="center"
-				alignItems="center"
-				spacing={4}>
-				{[ 1, 2, 3, 4 ].map( ( val, index ) => (
-					<Grid
-						key={index}
-						item xs={12} md={6}>
-						<FramedImage
-							imageNumber={index}
-							callback={imageSelectionChanged}/>
-					</Grid>
-				) )}
-			</Grid>
+		<div className={classes.root}>
+			<div className={classes.center}>
+				<Grid
+					className={classes.grid}
+					container
+					direction="row"
+					justify="center"
+					alignItems="center"
+					spacing={2}>
+					{[ 1, 2, 3, 4 ].map( ( val, index ) => (
+						<Grid
+							key={index}
+							item xs={12} sm={6}>
+							<FramedImage
+								imageNumber={index}
+								callback={imageSelectionChanged}
+								isSelected={images[index]}/>
+						</Grid>
+					) )}
+				</Grid>
 
-			<OrderForm/>
+				<OrderForm/>
 
-			<Button
-				className={classes.button}
-				variant="outlined"
-				color="primary"
-				onClick={submitOrder}
-				disabled={!isOrderComplete( images )}>
+				<Button
+					className={classes.button}
+					variant="outlined"
+					color="primary"
+					onClick={submitOrder}
+					disabled={!isOrderComplete( images )}>
 					Order
-			</Button>
+				</Button>
+			</div>
 		</div>
 	);
 };
