@@ -48,7 +48,7 @@ const ImagesWall = ( { user, dispatch, history } ) => {
 					direction="row"
 					justify="center"
 					alignItems="center"
-					spacing={2}>
+					spacing={4}>
 					{[ 1, 2, 3, 4 ].map( ( val, index ) => (
 						<Grid
 							key={index}

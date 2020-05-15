@@ -22,7 +22,7 @@ class UploadImage extends React.Component {
         acceptType={["jpg", "gif", "png","jpeg"]}
         defaultValue={[]}>
         {({ imageList, onImageUpload, onImageRemoveAll }) => (
-          <div className="">
+          <>
             {!imageList.length ? 
               <Button
                 className="add-action"
@@ -40,11 +40,11 @@ class UploadImage extends React.Component {
               <div key={image.key}>
                 <img 
                   src={image.dataURL} 
-                  className="inner-image"
+                  className="image"
                   onClick={image.onUpdate}/>
               </div>
             ))}
-          </div>
+          </>
         )}
       </ImageUploading>
     );
