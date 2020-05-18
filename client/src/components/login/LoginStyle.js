@@ -12,7 +12,7 @@ export const useStyles = makeStyles( ( theme ) => ( {
 		justifyContent: "center",
 	},
 	fields:{
-		height: 500,
+		height: 300,
 		margin: 50,
 	},
 	field:{

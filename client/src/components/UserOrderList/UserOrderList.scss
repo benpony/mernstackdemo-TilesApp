@@ -1,9 +1,15 @@
-.searchBar{
-    margin: 10px 20px 10px 20px;
+.searchBar {
+    margin: auto;
+    max-width: 300px;
+    padding: 10px 20px 10px 20px;
     input{
-        font-family: cursive;
         font-weight: lighter;
     }
+}
+
+.grid {
+    padding: 0 40px 0 40px;
+    max-width: 800px,
 }
 
 .gridItem {

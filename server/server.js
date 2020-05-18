@@ -1,6 +1,7 @@
 const express = require( "express" );
 const bodyParser= require( "body-parser" );
 const app = express();
+const secrets = require( "./secrets" );
 
 ( async () => {
 	app.use( bodyParser.urlencoded( { extended: true, limit: "50mb" } ) );
@@ -9,9 +10,7 @@ const app = express();
 
 	// Mongo
 	const MongoClient = require( "mongodb" ).MongoClient;
-	const _dbUser = "root";
-	const _dbPassword = "secretpassword";
-	const connectionString =  `mongodb+srv://${_dbUser}:${_dbPassword}@cluster0-zy0ho.mongodb.net/test?retryWrites=true&w=majority`;
+	const connectionString =  `mongodb+srv://${secrets._dbUser}:${secrets._dbPassword}@cluster0-zy0ho.mongodb.net/test?retryWrites=true&w=majority`;
 	const client = await MongoClient.connect( connectionString,{ 
 		useNewUrlParser: true, 
 		useUnifiedTopology: true 
@@ -21,15 +20,12 @@ const app = express();
 	// S3
 	const AWS = require( "aws-sdk" );
 	const bluebird = require( "bluebird" ); 
-	const _s3bucket = "images-wall";
-	const _awsAccesssKeyId = "AKIAJWIRHE6TIHA6HKPQ";
-	const _awsSecretAccessKey = "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";
 	AWS.config.update( {
-		accessKeyId: _awsAccesssKeyId,
-		secretAccessKey: _awsSecretAccessKey
+		accessKeyId: secrets._awsAccesssKeyId,
+		secretAccessKey: secrets._awsSecretAccessKey
 	} );
 	AWS.config.setPromisesDependency( bluebird );
-	exports.s3Bucket = new AWS.S3( { params: { Bucket: _s3bucket } } );
+	exports.s3Bucket = new AWS.S3( { params: { Bucket: secrets._s3bucket } } );
 
 	app.get( "/orders", require ( "./api/controllers/user/get" ).getUser );
 
@@ -37,5 +33,8 @@ const app = express();
 
 	app.get( "/allOrders", require ( "./api/controllers/user/getList" ).getUsers );
  
-	app.listen( 9000, console.log( "listening on 9000" ) );
+	const server = app.listen( process.env.PORT || 5000, function () {
+		const port = server.address().port;
+		console.log( `Express is working on port : ${port}` );
+	} );
 } )().catch( console.error );

@@ -1,7 +1,9 @@
+import { v4 as uuidv4 } from "uuid";
+
 export default {
 	user:{
-		uuid:null,
-		order:{
+		uuid: uuidv4(),
+		order: {
 			uuid:null,
 			name:null,
 			date: null,

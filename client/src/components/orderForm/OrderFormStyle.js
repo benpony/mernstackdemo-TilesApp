@@ -10,9 +10,6 @@ export const useStyles = makeStyles( ( theme ) => ( {
 	},
 	textField:{
 		minWidth:"36vh",
-		"& input":{
-			fontFamily: "cursive",
-		}
 	},
 	buttons: {
 		"& > *": {

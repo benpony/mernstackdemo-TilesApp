@@ -1,8 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 import { red } from "@material-ui/core/colors";
 
-const fontFamily = "cursive";
-
 export const useStyles = makeStyles( ( theme ) => ( {
 	root: {
 		maxWidth: 345,
@@ -25,7 +23,6 @@ export const useStyles = makeStyles( ( theme ) => ( {
 	},
 	avatar: {
 		opacity: 0.8,
-		fontFamily:fontFamily,
 	},
 	center: {
 		display: "flex",
@@ -34,15 +31,9 @@ export const useStyles = makeStyles( ( theme ) => ( {
 		justifyContent: "center",
 		margin:40,
 	},
-	typography: {
-		"& span": {
-			fontFamily:fontFamily,
-		}
-	},
 	id: {
 		marginLeft: 29,
 		fontSize: 11,
-		fontFamily:fontFamily,
 		lineHeight: 2,
 	}
 } ) );

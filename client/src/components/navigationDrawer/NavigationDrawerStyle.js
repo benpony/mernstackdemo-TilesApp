@@ -9,7 +9,6 @@ export const useStyles = makeStyles( {
 		color: "#ff037d",
 		"& span":{
 			fontWeight: 500,
-			fontFamily: "cursive"
 		}
 	},
 	listIcon:{
