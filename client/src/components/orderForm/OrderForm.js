@@ -8,12 +8,16 @@ import Grid from "@material-ui/core/Grid";
 
 const validate = values => {
 	const errors = {};
-	const requiredFields = [ "name", "address" ];
+	const requiredFields = [ "name", "address", "email" ];
 	requiredFields.forEach( field => {
 		if ( !values[field] ) {
 			errors[field] = "Required";
 		}
 	} );
+	if ( values.email &&
+		!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test( values.email ) ) {
+		errors.email = "Invalid email address";
+	}
 	return errors;
 };
 
@@ -33,20 +37,31 @@ const OrderForm = ( props ) => {
 				justify="center"
 				alignItems="center"
 				spacing={1}>
-				<Grid item xs={12} md={6}>
+				<Grid item xs={12}>
 					<Field
+						className={classes.textField}
 						name="name"
 						label="Full Name"
 						component={renderTextField}
 						onChange={nameChanged}
 					/>
 				</Grid>
-				<Grid item xs={12} md={6}>
+				<Grid item xs={12}>
 					<Field
+						className={classes.textField}
 						name="address"
-						label="Full Address"
+						label="Full Shipping Address"
 						component={renderTextField}
 						onChange={addressChanged}
+					/>
+				</Grid>
+				<Grid item xs={12}>
+					<Field
+						className={classes.textField}
+						name="email"
+						label="Email Address"
+						component={renderTextField}
+						onChange={emailChanged}
 					/>
 				</Grid>
 			</Grid>
@@ -60,6 +75,11 @@ const OrderForm = ( props ) => {
 
 	function addressChanged( event, newValue ){
 		user.order.address= newValue;
+		dispatch( userChanged( { ...user } ) );
+	}
+
+	function emailChanged( event, newValue ){
+		user.order.email= newValue;
 		dispatch( userChanged( { ...user } ) );
 	}
 };

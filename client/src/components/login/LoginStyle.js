@@ -1,21 +1,27 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 export const useStyles = makeStyles( ( theme ) => ( {
-	loginForm: {
-		textAlign: "center",
+	root:{
+
 	},
-	fields:{
-		height:200,
+	loginForm: {
+		flexGrow: 1,
 		display: "flex",
+		flexDirection: "column",
 		alignItems: "center",
 		justifyContent: "center",
-		margin: theme.spacing( 3 ),
+	},
+	fields:{
+		height: 500,
+		margin: 50,
 	},
 	field:{
 		width: 245
 	},
 	buttons: {
 		"& > *": {
+			height:80,
+			width:200,
 			margin: theme.spacing( 1 ),
 		},
 	},

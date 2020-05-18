@@ -6,17 +6,13 @@ export const useStyles = makeStyles( ( theme ) => ( {
 		maxWidth: "80vh",
 	},
 	orderForm: {
-		margin: "30px",
+		margin: "60px 30px 40px",
 	},
-	fields:{
-		display: "flex",
-		alignItems: "center",
-		justifyContent: "center",
-		margin: theme.spacing( 3 ),
-	},
-	field:{
-		width: 245,
-		margin: theme.spacing( 3 ),
+	textField:{
+		minWidth:"36vh",
+		"& input":{
+			fontFamily: "cursive",
+		}
 	},
 	buttons: {
 		"& > *": {

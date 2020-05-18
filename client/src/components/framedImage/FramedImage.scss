@@ -1,3 +1,6 @@
+$pinkColor: #ff037d; 
+$blueColor: #0d47a1;
+
 @keyframes shrink-grow {
   0% {
     transform: scale(.95);
@@ -12,9 +15,9 @@
   }
 
   50% {
-    color: #ff037d;
-    border-color: #ff037d;
-    fill: #ff037d;
+    color: $blueColor;
+    border-color: $blueColor;
+    fill: $blueColor;
   }
 }
 
@@ -96,7 +99,7 @@
 
 .add-icon{
   font-size: 4.5rem !important;
-  color: #ff0077;
+  color: $pinkColor;
 }
 
 .action-buttons{

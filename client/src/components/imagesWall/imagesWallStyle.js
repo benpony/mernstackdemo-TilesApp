@@ -1,18 +1,20 @@
 import { makeStyles } from "@material-ui/core/styles";
+import BackgroundImage from "../../assets/brick-room-opacity_max.png";
 
 export const useStyles = makeStyles( ( theme ) => ( {
 	root:{
-		padding: "2rem",
-	},
-	center: {
-		textAlign: "center",
 		display: "flex",
+		flexGrow: 1,
 		flexDirection: "column",
 		alignItems: "center",
 		justifyContent: "center",
+		textAlign: "center",
+		/*
+		background: `url(${BackgroundImage})
+					 no-repeat center center fixed`
+		*/
 	},
 	grid: {
-		flexGrow: 1,
 		maxWidth: "600px",
 	},
 	button: {
@@ -22,4 +24,15 @@ export const useStyles = makeStyles( ( theme ) => ( {
 		borderWidth: "medium",
 		margin: "0 0 20px 0"
 	},
+	pickSomePhotosText:{
+		paddingTop: "2rem",
+		textTransform: "uppercase",
+		fontWeight: "700",
+		fontSize: "14px",
+		letterSpacing: "1.6px",
+		color: "#8c8c8c",
+		width: "100%",
+		textAlign: "center",
+		minHeight:"40px",
+	}
 } ) );

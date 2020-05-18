@@ -1,16 +1,22 @@
 import React from "react";
-import "./FramedImage.scss";
-import Frame from "../../assets/white.svg";
+import PropTypes from "prop-types";
+import Frame from "../../assets/white-frame.svg";
 import UploadImage from "../uploadImage/UploadImage";
+import "./FramedImage.scss";
 
-export default function FramedImage( { isSelected, imageNumber, callback } ) {
+export default function FramedImage( { isSelected, imageNumber, image, callback } ) {
 	return (
 		<div className="framedImageComponent">
 			<div className={isSelected ? "tile" : "tile unselected animated"}>
 				<div className="preview">
-					<UploadImage
-						imageNumber={imageNumber}
-						callback={callback}/>
+					{image ?
+						<img
+							src={image.location}
+							className="image"/>
+						: <UploadImage
+							imageNumber={imageNumber}
+							callback={callback}/>
+					}
 				</div>
 				<div className="tileFrame">
 					{isSelected ? (
@@ -24,3 +30,10 @@ export default function FramedImage( { isSelected, imageNumber, callback } ) {
 		</div>
 	);
 }
+
+FramedImage.propTypes = {
+	isSelected: PropTypes.bool.isRequired,
+	imageNumber: PropTypes.number.isRequired,
+	image: PropTypes.object,
+	callback: PropTypes.func
+};

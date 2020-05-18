@@ -53,23 +53,3 @@ class UploadImage extends React.Component {
 UploadImage.propTypes = {};
 
 export default UploadImage;
-
-
-{/* 
-  <div className="action-buttons">
-    <Button
-    className="actions"
-    variant="contained"
-    color="primary"
-    onClick={image.onUpdate}>
-      Update
-  </Button>
-  <Button
-    className="actions"
-    variant="contained"
-    color="secondary"
-    onClick={image.onRemove}>
-      Remove
-  </Button> 
-  </div> 
-*/}

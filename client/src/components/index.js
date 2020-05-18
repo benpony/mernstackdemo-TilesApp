@@ -9,7 +9,6 @@ export const renderTextField = ( {
 } ) => (
 	<TextField
 		label={label}
-		placeholder={label}
 		error={touched && invalid}
 		helperText={touched && error}
 		variant="outlined"

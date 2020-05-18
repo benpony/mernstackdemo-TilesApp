@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/static/css/main.a0639e81.chunk.css",
+    "main.js": "/static/js/main.4b5d8466.chunk.js",
+    "main.js.map": "/static/js/main.4b5d8466.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.34785019.js",
+    "runtime-main.js.map": "/static/js/runtime-main.34785019.js.map",
+    "static/js/2.20bf3a54.chunk.js": "/static/js/2.20bf3a54.chunk.js",
+    "static/js/2.20bf3a54.chunk.js.map": "/static/js/2.20bf3a54.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.df19dd8624daa5a09c5fcf66d63586d3.js": "/precache-manifest.df19dd8624daa5a09c5fcf66d63586d3.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.a0639e81.chunk.css.map": "/static/css/main.a0639e81.chunk.css.map",
+    "static/js/2.20bf3a54.chunk.js.LICENSE.txt": "/static/js/2.20bf3a54.chunk.js.LICENSE.txt",
+    "static/media/brick-room-opacity_max.png": "/static/media/brick-room-opacity_max.1a44c753.png",
+    "static/media/white-frame.svg": "/static/media/white-frame.e6914697.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.34785019.js",
+    "static/js/2.20bf3a54.chunk.js",
+    "static/css/main.a0639e81.chunk.css",
+    "static/js/main.4b5d8466.chunk.js"
+  ]
+}

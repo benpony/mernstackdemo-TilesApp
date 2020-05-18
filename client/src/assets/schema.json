@@ -6,6 +6,7 @@
     "orders": [{
         "uuid": "",
         "name": "",
+        "email":"",
         "address": "",
         "images": []
     }]

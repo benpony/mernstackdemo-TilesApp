@@ -4,6 +4,8 @@ export default {
 		order:{
 			uuid:null,
 			name:null,
+			date: null,
+			email:null,
 			address:null,
 			images:[]
 		},

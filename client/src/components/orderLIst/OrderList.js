@@ -1,71 +1,35 @@
-import React, { useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { loadUserOrders } from "../../actions/orderActions";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
-import { useStyles } from "./OrderListStyle";
+import OrderCard from "../orderCard/OrderCard";
+import Grid from "@material-ui/core/Grid";
 
-const OrderList = ( { orders, user, dispatch } ) => {
-	const classes = useStyles();
-	const getOrders = () => {
-		dispatch( loadUserOrders( user.uuid ) );
-	};
-
-	useEffect( () => {
-		getOrders();
-	}, [ user.uuid ] );
-
+const OrderList = ( { orders, hidePreview } ) => {
 	return (
-		<div className={classes.root}>
-			{orders.map( order=>{
-				return order ?
-					( <Card
-						key={order.uuid}
-						className={classes.card}>
-						<CardContent>
-							<Typography
-								className={classes.title}
-								color="textSecondary"
-								gutterBottom>
-								NAME: {order.name}
-							</Typography>
-							<Typography
-								className={classes.subTitle}
-								color="textSecondary"
-								gutterBottom>
-								ORDER ID: {order.uuid}
-							</Typography>
-							<Typography
-								className={classes.subTitle}
-								color="textSecondary"
-								gutterBottom>
-								ADDRESS: {order.address}
-							</Typography>
+		<div className="OrderListComponent">
+			<Grid
+				className="grid"
+				container
+				direction="row"
+				spacing={1}>
 
-							{order.images.map( ( img, index ) =>{
-								return img && img.dataURL?
-									<img
-										key={index}
-										className={classes.imagePreview}
-										src={img.dataURL}/> : undefined;
-							} )}
-						</CardContent>
-					</Card> ) : undefined;
-			} )}
+				{orders.map( order=>( order ?
+					<Grid
+						className="gridItem"
+						key={order.uuid}
+						item xs={12}
+						sm={6}
+						md={3}>
+						<OrderCard
+							order={order}
+							hidePreview={hidePreview}/>
+					</Grid> : undefined ) )}
+			</Grid>
 		</div>
 	);
 };
 OrderList.propTypes = {
-	orders: PropTypes.array,
+	orders: PropTypes.array.isRequired,
+	hidePreview : PropTypes.bool
 };
 
-const mapStateToProps = function ( state, ownProps ) {
-	return {
-		user: state.user,
-		orders: state.orders
-	};
-};
-
-export default connect( mapStateToProps )( OrderList );
+export default OrderList;
