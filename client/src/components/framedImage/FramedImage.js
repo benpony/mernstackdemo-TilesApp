@@ -11,7 +11,7 @@ export default function FramedImage( { isSelected, imageNumber, image, callback 
 				<div className="preview">
 					{image ?
 						<img
-							src={image.location}
+							src={image.location ? image.location : image.dataURL}
 							className="image"
 							alt=""/>
 						: <UploadImage

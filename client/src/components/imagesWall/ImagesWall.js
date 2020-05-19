@@ -48,6 +48,7 @@ const ImagesWall = ( { user, dispatch, history } ) => {
 			item xs={12} sm={6}>
 			<FramedImage
 				imageNumber={index}
+				image={images[index]}
 				callback={imageSelectionChanged}
 				isSelected={images[index] ? true : false}/>
 		</Grid>
