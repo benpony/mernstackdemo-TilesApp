@@ -39,7 +39,7 @@ const ImagesWall = ( { user, dispatch, history } ) => {
 			images
 		};
 		dispatch( createUserOrder( user ) );
-		setTimeout( ()=>{history.push( "/orders" );}, 4000 );
+		history.push( "/orders" );
 	};
 
 	const getTilesGridItems =( numOfTiles ) => numOfTiles.map( ( val, index ) => (
