@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { useStyles } from "./imagesWallStyle";
 import { connect } from "react-redux";
 import { userChanged } from "../../actions/userActions";
@@ -8,9 +9,12 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import FramedImage from "../framedImage/FramedImage";
 import OrderForm from "../orderForm/OrderForm";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+
 
 const ImagesWall = ( { user, dispatch, history } ) => {
 	const classes = useStyles();
+	const matches = useMediaQuery( "(min-width:600px)" );
 	const [ images, setImages ] = useState( [ ] );
 
 	const imageSelectionChanged = ( imageNumber, image ) =>{
@@ -38,10 +42,20 @@ const ImagesWall = ( { user, dispatch, history } ) => {
 		setTimeout( ()=>{history.push( "/orders" );}, 4000 );
 	};
 
+	const getTilesGridItems =( numOfTiles ) => numOfTiles.map( ( val, index ) => (
+		<Grid
+			key={index}
+			item xs={12} sm={6}>
+			<FramedImage
+				imageNumber={index}
+				callback={imageSelectionChanged}
+				isSelected={images[index] ? true : false}/>
+		</Grid>
+	) );
+
 	const isItemsSelected = array => Array.isArray( array ) && array.length;
 	const isOrderComplete = images => isItemsSelected( images ) && user.order.address;
 
-	const numOfTiles = isMobileRes() ? [ 1 ] : [ 1, 2, 3, 4 ];
 	return (
 		<div className={classes.root}>
 			<div className={classes.pickSomePhotosText}>
@@ -55,16 +69,9 @@ const ImagesWall = ( { user, dispatch, history } ) => {
 				justify="center"
 				alignItems="center"
 				spacing={4}>
-				{numOfTiles.map( ( val, index ) => (
-					<Grid
-						key={index}
-						item xs={12} sm={6}>
-						<FramedImage
-							imageNumber={index}
-							callback={imageSelectionChanged}
-							isSelected={images[index] ? true : false}/>
-					</Grid>
-				) )}
+				{matches ?
+					getTilesGridItems( [ 1, 2, 3, 4 ] ):
+					getTilesGridItems( [ 1 ] )}
 			</Grid>
 
 			<OrderForm/>
@@ -79,10 +86,10 @@ const ImagesWall = ( { user, dispatch, history } ) => {
 			</Button>
 		</div>
 	);
+};
 
-	function isMobileRes() {
-		return ( ( window.innerWidth <= 400 ) );
-	}
+ImagesWall.propTypes = {
+	user: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = function ( state ) {

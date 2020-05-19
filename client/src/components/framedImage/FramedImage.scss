@@ -67,10 +67,13 @@ $blueColor: #0d47a1;
 
     .image{
       position: relative;
-      z-index:2;
+      z-index:9999;
       opacity: 1;
-      height: 232px;
-      margin-top:2px;
+      max-height: 242px;
+      min-height: 240px;
+      min-width: 230px;
+      max-width: 232px;
+      margin: 12px 0 0 1px;
     }  
   }
 

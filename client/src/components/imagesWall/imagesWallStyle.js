@@ -9,10 +9,6 @@ export const useStyles = makeStyles( ( theme ) => ( {
 		alignItems: "center",
 		justifyContent: "center",
 		textAlign: "center",
-		/*
-		background: `url(${BackgroundImage})
-					 no-repeat center center fixed`
-		*/
 	},
 	grid: {
 		maxWidth: "600px",

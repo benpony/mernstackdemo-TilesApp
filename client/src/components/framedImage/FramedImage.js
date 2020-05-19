@@ -12,7 +12,8 @@ export default function FramedImage( { isSelected, imageNumber, image, callback 
 					{image ?
 						<img
 							src={image.location}
-							className="image"/>
+							className="image"
+							alt=""/>
 						: <UploadImage
 							imageNumber={imageNumber}
 							callback={callback}/>
