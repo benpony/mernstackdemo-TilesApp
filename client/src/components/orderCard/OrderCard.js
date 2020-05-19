@@ -17,7 +17,7 @@ import FramedImage from "../framedImage/FramedImage";
 import moment from "moment-es6";
 import { useStyles } from "./OrderCardStyle";
 
-const OrderCard = ( { order, hidePreview } ) => {
+const OrderCard = ( { order, hidePreview, hideGestures } ) => {
 	const classes = useStyles();
 	const [ expanded, setExpanded ] = React.useState( false );
 
@@ -49,18 +49,20 @@ const OrderCard = ( { order, hidePreview } ) => {
 					title="Paella dish"/>
 			}
 			<CardActions disableSpacing>
-				<IconButton
-					aria-label="add to favorites"
-					disabled={true}
-					style={{ opacity:0.4 }}>
-					<FavoriteIcon />
-				</IconButton>
-				<IconButton
-					aria-label="share"
-					disabled={true}
-					style={{ opacity:0.4 }}>
-					<ShareIcon />
-				</IconButton>
+				{hideGestures ? undefined:
+					( <> <IconButton
+						aria-label="add to favorites"
+						disabled={true}
+						style={{ opacity:0.4 }}>
+						<FavoriteIcon />
+					</IconButton>
+					<IconButton
+						aria-label="share"
+						disabled={true}
+						style={{ opacity:0.4 }}>
+						<ShareIcon />
+					</IconButton>
+					</> )}
 				<IconButton
 					className={
 						clsx( classes.expand, { [classes.expandOpen]: expanded, } )
@@ -108,7 +110,8 @@ const OrderCard = ( { order, hidePreview } ) => {
 };
 OrderCard.propTypes = {
 	order: PropTypes.object.isRequired,
-	hidePreview: PropTypes.bool
+	hidePreview: PropTypes.bool,
+	hideGestures: PropTypes.bool
 };
 
 export default OrderCard;

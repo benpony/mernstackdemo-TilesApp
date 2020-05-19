@@ -48,6 +48,7 @@ const AdminOrderList = ( { admin, dispatch } ) => {
 					<OrderList
 						orders={user.orders}
 						hidePreview={true}
+						hideGestures={true}
 					/>
 				</div>
 			) )}

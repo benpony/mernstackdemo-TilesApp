@@ -15,7 +15,7 @@ export function loadAdminOrders( admin ) {
 	return dispatch => {
 		axios.get( `/allOrders?pwd=${admin.adminPassword}`, options )
 			.then( function ( response ) {
-				admin.users= response.data.users;
+				admin.users = response.data.users.reverse();
 				dispatch( adminChangedSuccess( { ...admin } ) );
 			} )
 			.catch( console.error );

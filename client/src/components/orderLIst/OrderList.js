@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import OrderCard from "../orderCard/OrderCard";
 import Grid from "@material-ui/core/Grid";
 
-const OrderList = ( { orders, hidePreview } ) => {
+const OrderList = ( { orders, hidePreview, hideGestures } ) => {
 	return (
 		<div className="OrderListComponent">
 			<Grid
@@ -21,7 +21,8 @@ const OrderList = ( { orders, hidePreview } ) => {
 						md={3}>
 						<OrderCard
 							order={order}
-							hidePreview={hidePreview}/>
+							hidePreview={hidePreview}
+							hideGestures={hideGestures}/>
 					</Grid> : undefined ) )}
 			</Grid>
 		</div>
@@ -29,7 +30,8 @@ const OrderList = ( { orders, hidePreview } ) => {
 };
 OrderList.propTypes = {
 	orders: PropTypes.array.isRequired,
-	hidePreview : PropTypes.bool
+	hidePreview : PropTypes.bool,
+	hideGestures: PropTypes.bool
 };
 
 export default OrderList;
