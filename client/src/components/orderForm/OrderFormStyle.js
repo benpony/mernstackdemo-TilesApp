@@ -6,10 +6,12 @@ export const useStyles = makeStyles( ( theme ) => ( {
 		maxWidth: "80vh",
 	},
 	orderForm: {
-		margin: "60px 30px 40px",
+		margin: "30px",
 	},
 	textField:{
-		minWidth:"36vh",
+		"& input": {
+			minWidth:"260px",
+		}
 	},
 	buttons: {
 		"& > *": {

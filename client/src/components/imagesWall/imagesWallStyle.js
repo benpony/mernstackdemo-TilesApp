@@ -1,5 +1,12 @@
 import { makeStyles } from "@material-ui/core/styles";
-import BackgroundImage from "../../assets/brick-room-opacity_max.png";
+
+const testStyle = {
+	textTransform: "uppercase",
+	letterSpacing: "1.6px",
+	color: "#8c8c8c",
+	width: "100%",
+	textAlign: "center",
+};
 
 export const useStyles = makeStyles( ( theme ) => ( {
 	root:{
@@ -20,15 +27,18 @@ export const useStyles = makeStyles( ( theme ) => ( {
 		borderWidth: "medium",
 		margin: "0 0 20px 0"
 	},
-	pickSomePhotosText:{
-		paddingTop: "2rem",
-		textTransform: "uppercase",
-		fontWeight: "700",
+	pickSomePhotosText:	{
+		paddingTop: "1rem",
 		fontSize: "14px",
-		letterSpacing: "1.6px",
-		color: "#8c8c8c",
-		width: "100%",
-		textAlign: "center",
-		minHeight:"40px",
+		fontWeight: "700",
+		...testStyle
+	},
+	rotateMessage: {
+		paddingBottom: "1rem",
+		fontSize: "10px",
+		...testStyle,
+	},
+	rotateIcon: {
+
 	}
 } ) );

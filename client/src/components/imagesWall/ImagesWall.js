@@ -10,6 +10,7 @@ import Button from "@material-ui/core/Button";
 import FramedImage from "../framedImage/FramedImage";
 import OrderForm from "../orderForm/OrderForm";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import ScreenRotationIcon from "@material-ui/icons/ScreenRotation";
 
 
 const ImagesWall = ( { user, dispatch, history } ) => {
@@ -61,6 +62,11 @@ const ImagesWall = ( { user, dispatch, history } ) => {
 		<div className={classes.root}>
 			<div className={classes.pickSomePhotosText}>
 					pick some photos!
+			</div>
+			<div className={classes.rotateMessage}>
+				<p> rotate screen to order </p>
+				<p> up to four tiles! </p>
+				<ScreenRotationIcon className={classes.rotateIcon}/>
 			</div>
 
 			<Grid
