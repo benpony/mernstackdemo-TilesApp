@@ -9,6 +9,8 @@ import {
 import { connect } from "react-redux";
 import Cookies from "js-cookie";
 import { v4 as uuidv4 } from "uuid";
+import { usePromiseTracker } from "react-promise-tracker";
+import { LoadingIndicator } from "./components/index";
 import { userChanged } from "./actions/userActions";
 import { loadUserOrders } from "./actions/orderActions";
 import NavDrawer from "./components/navigationDrawer/NavigationDrawer";
@@ -17,7 +19,8 @@ import ImagesWall from "./components/imagesWall/ImagesWall";
 import UserOrderList from "./components/UserOrderList/UserOrderList";
 import AdminOrderList from "./components/adminOrderList/AdminOrderList";
 
-function App( { user, dispatch } ) {
+const App = ( { user, dispatch } ) => {
+	const { promiseInProgress } = usePromiseTracker( );
 
 	useEffect( () => {
 		( async ()=>{
@@ -38,20 +41,23 @@ function App( { user, dispatch } ) {
 					<NavDrawer/>
 				</div>
 				<div className="main">
-					<div className="app-routes">
-						<Switch>
-							<Route path="/orders" component={UserOrderList}/>
-							<Route path="/adminOrders" component={AdminOrderList}/>
-							<Route path="/admin" component={Login} />
-							<Route path="/" component={ImagesWall} />
-						</Switch>
-					</div>
+					{promiseInProgress ?
+						<LoadingIndicator/> :
+						<div className="app-routes">
+							<Switch>
+								<Route path="/orders" component={UserOrderList}/>
+								<Route path="/adminOrders" component={AdminOrderList}/>
+								<Route path="/admin" component={Login} />
+								<Route path="/" component={ImagesWall} />
+							</Switch>
+						</div>
+					}
 				</div>
 				<div className="footer"/>
 			</div>
 		</Router>
 	);
-}
+};
 
 const mapStateToProps = function ( state ) {
 	return {

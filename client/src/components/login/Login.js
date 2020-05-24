@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import Button from "@material-ui/core/Button";
 import { adminChanged } from "../../actions/adminActions";
-import { useStyles } from "./LoginStyle";
 import { renderTextField } from "../index";
+import { useStyles } from "./LoginStyle";
 
 const validate = values => {
 	const errors = {};
@@ -20,10 +20,7 @@ const validate = values => {
 const LoginForm = ( props ) => {
 	const classes = useStyles();
 	const { pristine, reset, submitting, admin, dispatch, history } = props;
-
-	const login = () => {
-		history.push( "/adminOrders" );
-	};
+	const login = () => history.push( "/adminOrders" );
 
 	return (
 		<div className={classes.root}>

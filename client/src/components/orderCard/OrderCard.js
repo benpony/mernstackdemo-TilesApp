@@ -36,21 +36,17 @@ const OrderCard = ( { order, hidePreview, hideGestures } ) => {
 					</Avatar>
 				}
 				title={order.address}
-				subheader={ order.date ?
-					moment( order.date ).format( "MM ddd, YYYY hh:mm:ss a" )
-					:undefined
-				}
+				subheader={ order.date && moment( order.date ).format( "MM ddd, YYYY hh:mm:ss a" )}
 				className={classes.typography}/>
-			{hidePreview ?
-				undefined :
+			{!hidePreview &&
 				<CardMedia
 					className={classes.media}
 					image={order.images[0].location}
 					title="Paella dish"/>
 			}
 			<CardActions disableSpacing>
-				{hideGestures ? undefined:
-					( <> <IconButton
+				{!hideGestures && ( <>
+					<IconButton
 						aria-label="add to favorites"
 						disabled={true}
 						style={{ opacity:0.4 }}>
@@ -62,7 +58,7 @@ const OrderCard = ( { order, hidePreview, hideGestures } ) => {
 						style={{ opacity:0.4 }}>
 						<ShareIcon />
 					</IconButton>
-					</> )}
+				</> )}
 				<IconButton
 					className={
 						clsx( classes.expand, { [classes.expandOpen]: expanded, } )

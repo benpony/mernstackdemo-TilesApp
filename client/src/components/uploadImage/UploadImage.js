@@ -23,7 +23,7 @@ class UploadImage extends React.Component {
         defaultValue={[]}>
         {({ imageList, onImageUpload, onImageRemoveAll }) => (
           <>
-            {!imageList.length ? 
+            {!imageList.length && 
               <Button
                 className="add-action"
                 variant="outlined"
@@ -32,8 +32,7 @@ class UploadImage extends React.Component {
                   <AddIcon className="add-icon">
                     add
                   </AddIcon>
-              </Button> : 
-              undefined
+              </Button>
             }
 
             {imageList.map((image) => (

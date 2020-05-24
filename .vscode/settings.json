@@ -15,7 +15,8 @@
     },
     "editor.codeActionsOnSaveTimeout": 5000,
     "cSpell.words": [
-        "secretpassword"
+        "secretpassword",
+        "uuidv"
     ],
     "eslint.enable": true
 }

@@ -20,12 +20,12 @@ export default function FramedImage( { isSelected, imageNumber, image, callback 
 					}
 				</div>
 				<div className="tileFrame">
-					{isSelected ? (
+					{isSelected && (
 						<img
 							className="frame"
 							onClick={( e ) => {e.preventDefault(); e.stopPropagation();}}
 							src={Frame}/>
-					) : undefined}
+					)}
 				</div>
 			</div>
 		</div>

@@ -5,13 +5,13 @@ import { connect } from "react-redux";
 import { userChanged } from "../../actions/userActions";
 import { createUserOrder } from "../../actions/orderActions";
 import { v4 as uuidv4 } from "uuid";
+import { isMobile } from "react-device-detect";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import ScreenRotationIcon from "@material-ui/icons/ScreenRotation";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import FramedImage from "../framedImage/FramedImage";
 import OrderForm from "../orderForm/OrderForm";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import ScreenRotationIcon from "@material-ui/icons/ScreenRotation";
-
 
 const ImagesWall = ( { user, dispatch, history } ) => {
 	const classes = useStyles();
@@ -31,6 +31,7 @@ const ImagesWall = ( { user, dispatch, history } ) => {
 	};
 
 	const submitOrder = () => {
+		user.uuid = user.uuid ? user.uuid : uuidv4();
 		user.order = {
 			uuid: uuidv4(),
 			name: user.order.name,
@@ -43,7 +44,7 @@ const ImagesWall = ( { user, dispatch, history } ) => {
 		history.push( "/orders" );
 	};
 
-	const getTilesGridItems =( numOfTiles ) => numOfTiles.map( ( val, index ) => (
+	const getTilesGridItems = ( numOfTiles ) => numOfTiles.map( ( val, index ) => (
 		<Grid
 			key={index}
 			item xs={12} sm={6}>
@@ -52,11 +53,23 @@ const ImagesWall = ( { user, dispatch, history } ) => {
 				image={images[index]}
 				callback={imageSelectionChanged}
 				isSelected={images[index] ? true : false}/>
-		</Grid>
-	) );
+		</Grid> ) );
+
+	const getTilesOrderForm = () => ( <>
+		<OrderForm/>
+		<Button
+			className={classes.button}
+			variant="outlined"
+			color="primary"
+			onClick={submitOrder}
+			disabled={!isOrderComplete( images )}>
+			Order
+		</Button>
+	</> );
 
 	const isItemsSelected = array => Array.isArray( array ) && array.length;
-	const isOrderComplete = images => isItemsSelected( images ) && user.order.address;
+	const isOrderFormComplete = order => order.name && order.address && order.email;
+	const isOrderComplete = images => isItemsSelected( images ) && isOrderFormComplete( user.order );
 
 	return (
 		<div className={classes.root}>
@@ -64,9 +77,19 @@ const ImagesWall = ( { user, dispatch, history } ) => {
 					pick some photos!
 			</div>
 			<div className={classes.rotateMessage}>
-				<p> rotate screen to order </p>
-				<p> up to four tiles! </p>
-				<ScreenRotationIcon className={classes.rotateIcon}/>
+				{isMobile && <>
+					{!matches ?
+						<>
+							<p> rotate screen to order </p>
+							<p> up to four tiles! </p>
+						</> :
+						<>
+							<p> rotate back! </p>
+							<p> to complete your order </p>
+						</>
+					}
+					<ScreenRotationIcon className={classes.rotateIcon}/>
+				</>}
 			</div>
 
 			<Grid
@@ -81,16 +104,9 @@ const ImagesWall = ( { user, dispatch, history } ) => {
 					getTilesGridItems( [ 1 ] )}
 			</Grid>
 
-			<OrderForm/>
-
-			<Button
-				className={classes.button}
-				variant="outlined"
-				color="primary"
-				onClick={submitOrder}
-				disabled={!isOrderComplete( images )}>
-					Order
-			</Button>
+			{isMobile ?
+				( !matches && getTilesOrderForm() ) :
+				getTilesOrderForm()}
 		</div>
 	);
 };

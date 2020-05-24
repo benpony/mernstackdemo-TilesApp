@@ -11,7 +11,9 @@ const AdminOrderList = ( { admin, dispatch } ) => {
 	const [ _users, setUsers ] = useState( [] );
 
 	useEffect( () => {
-		( async () => {dispatch( loadAdminOrders( admin ) ); } )();
+		if( admin && admin.users && !admin.users.length ){
+			( async () => dispatch( loadAdminOrders( admin ) ) )();
+		}
 	}, [ admin.adminPassword ] );
 
 	useEffect( () => {

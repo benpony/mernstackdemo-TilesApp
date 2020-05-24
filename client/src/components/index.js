@@ -1,5 +1,6 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 export const renderTextField = ( {
 	label,
@@ -16,3 +17,17 @@ export const renderTextField = ( {
 		{...custom}
 	/>
 );
+
+export const LoadingIndicator = () => {
+	return ( <div style={{
+		width: "100%",
+		height: "100%",
+		display: "flex",
+		justifyContent: "center",
+		alignItems: "center",
+	}}>
+		<CircularProgress
+			disableShrink
+			color="secondary" />
+	</div> );
+};
