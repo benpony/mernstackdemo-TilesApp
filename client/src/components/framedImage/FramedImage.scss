@@ -1,25 +1,4 @@
-$pinkColor: #ff037d; 
-$blueColor: #0d47a1;
-
-@keyframes shrink-grow {
-  0% {
-    transform: scale(.95);
-  }
-
-  50% {
-    transform: scale(1);
-  }
-
-  100% {
-    transform: scale(.95);
-  }
-
-  50% {
-    color: $blueColor;
-    border-color: $blueColor;
-    fill: $blueColor;
-  }
-}
+@import "../index.scss";
 
 .tile {
   position: relative;
@@ -58,8 +37,9 @@ $blueColor: #0d47a1;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    width: 236px;
-    height: 236px;
+
+    width: 248px;
+    height: 248px;
     margin-left: -5px;
     margin-top: -13px;
     -webkit-animation: fade-in .4s;
@@ -67,13 +47,10 @@ $blueColor: #0d47a1;
 
     .image{
       position: relative;
-      z-index:9999;
+      z-index:0;
       opacity: 1;
-      max-height: 242px;
-      min-height: 240px;
-      min-width: 230px;
-      max-width: 232px;
-      margin: 8px 0 0 1px;
+      height: 100%;
+      margin: 36px 0 0 6px;
     }  
   }
 
@@ -82,13 +59,15 @@ $blueColor: #0d47a1;
     width: 100%;
     position: absolute;
     z-index: 1;
+    animation: fade-in .4s;
+    -webkit-animation: fade-in .4s;
  
     .frame{         
       display: flex;
       justify-content: center;
       overflow: hidden;
       height: 264px;
-      animation: fade-in .4s;
+      margin-top:20px;
     }
   }
 }

@@ -12,6 +12,7 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import FramedImage from "../framedImage/FramedImage";
 import OrderForm from "../orderForm/OrderForm";
+import ImagesCounter from "../imagesCounter/ImagesCounter";
 
 const ImagesWall = ( { user, dispatch, history } ) => {
 	const classes = useStyles();
@@ -28,6 +29,11 @@ const ImagesWall = ( { user, dispatch, history } ) => {
 		}
 		user.order.images = images;
 		dispatch( userChanged( { ...user } ) );
+	};
+
+	const nullifyImage = ( imageNumber ) =>{
+		images[imageNumber] = null;
+		setImages( [ ...images ] );
 	};
 
 	const submitOrder = () => {
@@ -52,7 +58,8 @@ const ImagesWall = ( { user, dispatch, history } ) => {
 				imageNumber={index}
 				image={images[index]}
 				callback={imageSelectionChanged}
-				isSelected={images[index] ? true : false}/>
+				isSelected={images[index] ? true : false}
+				onFrameClick={nullifyImage}/>
 		</Grid> ) );
 
 	const getTilesOrderForm = () => ( <>
@@ -103,6 +110,10 @@ const ImagesWall = ( { user, dispatch, history } ) => {
 					getTilesGridItems( [ 1, 2, 3, 4 ] ):
 					getTilesGridItems( [ 1 ] )}
 			</Grid>
+
+			<div className={classes.imagesCounter}>
+				<ImagesCounter images={images}/>
+			</div>
 
 			{isMobile ?
 				( !matches && getTilesOrderForm() ) :

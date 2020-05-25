@@ -13,7 +13,7 @@ const secrets = require( "./secrets" );
 	const connectionString =  `mongodb+srv://${secrets._dbUser}:${secrets._dbPassword}@cluster0-zy0ho.mongodb.net/test?retryWrites=true&w=majority`;
 	const client = await MongoClient.connect( connectionString,{ 
 		useNewUrlParser: true, 
-		useUnifiedTopology: true 
+		useUnifiedTopology: true,
 	} );
 	exports.db = client.db( "images_wall" );
 

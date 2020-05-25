@@ -40,8 +40,7 @@ class UploadImage extends React.Component {
                 <img 
                   src={image.dataURL} 
                   className="image"
-                  alt=""
-                  onClick={image.onUpdate}/>
+                  alt=""/>
               </div>
             ))}
           </>

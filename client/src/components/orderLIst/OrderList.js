@@ -12,7 +12,7 @@ const OrderList = ( { orders, hidePreview, hideGestures } ) => {
 				className="ordersGrid"
 				direction="row"
 				spacing={2}>
-				{orders.length && orders.map( order => (
+				{orders.length ? orders.map( order => (
 					<Grid
 						className="gridItem"
 						key={order.uuid}
@@ -21,7 +21,7 @@ const OrderList = ( { orders, hidePreview, hideGestures } ) => {
 							order={order}
 							hidePreview={hidePreview}
 							hideGestures={hideGestures}/>
-					</Grid> ) )}
+					</Grid> ) ) : undefined}
 			</Grid>
 		</div>
 	);

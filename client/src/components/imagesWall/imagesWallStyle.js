@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-const testStyle = {
+const textStyle = {
 	textTransform: "uppercase",
 	letterSpacing: "1.6px",
 	color: "#8c8c8c",
@@ -31,14 +31,17 @@ export const useStyles = makeStyles( ( theme ) => ( {
 		paddingTop: "1rem",
 		fontSize: "14px",
 		fontWeight: "700",
-		...testStyle
+		...textStyle
 	},
 	rotateMessage: {
 		paddingBottom: "1rem",
 		fontSize: "10px",
-		...testStyle,
+		...textStyle,
 	},
-	rotateIcon: {
-
+	imagesCounter:{
+		paddingTop: "1rem",
+		fontSize: "14px",
+		fontWeight: "700",
+		...textStyle
 	}
 } ) );
