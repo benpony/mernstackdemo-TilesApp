@@ -5,7 +5,7 @@ import UploadImage from "../uploadImage/UploadImage";
 import "./FramedImage.scss";
 
 export default function FramedImage( { isSelected, imageNumber, image, callback, onFrameClick } ) {
-	const backspaceLongPress = useLongPress( ()=> onFrameClick( imageNumber ), 500 );
+	const backspaceLongPress = useLongPress( ()=> { onFrameClick( imageNumber ); }, 1000 );
 
 	return (
 		<div className="framedImageComponent">
