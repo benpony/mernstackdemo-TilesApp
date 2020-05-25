@@ -24,15 +24,14 @@ const ImagesWall = ( { user, dispatch, history } ) => {
 			images[imageNumber] = image[0];
 			setImages( [ ...images ] );
 		} else {
-			images.splice( imageNumber, 1 );
-			setImages( [ ...images ] );
+			removeImage( imageNumber );
 		}
 		user.order.images = images;
 		dispatch( userChanged( { ...user } ) );
 	};
 
-	const nullifyImage = ( imageNumber ) =>{
-		images[imageNumber] = null;
+	const removeImage = ( imageNumber ) =>{
+		images.splice( imageNumber, 1 );
 		setImages( [ ...images ] );
 	};
 
@@ -59,7 +58,7 @@ const ImagesWall = ( { user, dispatch, history } ) => {
 				image={images[index]}
 				callback={imageSelectionChanged}
 				isSelected={images[index] ? true : false}
-				onFrameClick={nullifyImage}/>
+				onFrameClick={imageNumber => removeImage( imageNumber ) }/>
 		</Grid> ) );
 
 	const getTilesOrderForm = () => ( <>

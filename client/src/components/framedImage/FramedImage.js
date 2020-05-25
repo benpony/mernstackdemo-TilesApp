@@ -1,11 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import Frame from "../../assets/white-frame.svg";
 import UploadImage from "../uploadImage/UploadImage";
+import { useLongPress } from "../index";
 import "./FramedImage.scss";
 
-export default function FramedImage( { isSelected, imageNumber, image, callback, onFrameClick } ) {
-	const backspaceLongPress = useLongPress( ()=> { onFrameClick( imageNumber ); }, 1000 );
+const FramedImage = ( { isSelected, imageNumber, image, callback, onFrameClick } ) => {
+	const longPressProps = useLongPress( {
+		onLongPress:() => onFrameClick( imageNumber ),
+		ms:2000
+	} );
 
 	return (
 		<div className="framedImageComponent">
@@ -26,14 +30,14 @@ export default function FramedImage( { isSelected, imageNumber, image, callback,
 						<img
 							className="frame"
 							onDoubleClick={() => {onFrameClick( imageNumber );}}
-							{...backspaceLongPress}
+							{...longPressProps }
 							src={Frame}/>
 					)}
 				</div>
 			</div>
 		</div>
 	);
-}
+};
 
 FramedImage.propTypes = {
 	isSelected: PropTypes.bool.isRequired,
@@ -43,26 +47,4 @@ FramedImage.propTypes = {
 	onFrameClick: PropTypes.func
 };
 
-
-function useLongPress( callback = () => {}, ms = 300 ) {
-	const [ startLongPress, setStartLongPress ] = useState( false );
-
-	useEffect( () => {
-		let timerId;
-		if ( startLongPress ) {
-			timerId = setTimeout( callback, ms );
-		} else {
-			clearTimeout( timerId );
-		}
-
-		return () => { clearTimeout( timerId );};
-	}, [ callback, ms, startLongPress ] );
-
-	return {
-		onMouseDown: () => setStartLongPress( true ),
-		onMouseUp: () => setStartLongPress( false ),
-		onMouseLeave: () => setStartLongPress( false ),
-		onTouchStart: () => setStartLongPress( true ),
-		onTouchEnd: () => setStartLongPress( false ),
-	};
-}
+export default FramedImage;
