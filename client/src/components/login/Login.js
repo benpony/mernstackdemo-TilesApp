@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import Button from "@material-ui/core/Button";
 import { adminChanged } from "../../actions/adminActions";
-import { useStyles } from "./LoginStyle";
 import { renderTextField } from "../index";
+import { useStyles } from "./LoginStyle";
 
 const validate = values => {
 	const errors = {};
@@ -20,41 +20,33 @@ const validate = values => {
 const LoginForm = ( props ) => {
 	const classes = useStyles();
 	const { pristine, reset, submitting, admin, dispatch, history } = props;
-
-	const login = () => {
-		history.push( "/adminOrders" );
-	};
+	const login = () => history.push( "/adminOrders" );
 
 	return (
-		<form
-			noValidate
-			className={classes.loginForm}>
-			<div className={classes.fields}>
-				<Field
-					name="password"
-					label="Enter Password"
-					className={classes.field}
-					component={renderTextField}
-					onChange={passwordChanged}
-				/>
-			</div>
-			<div className={classes.buttons}>
-				<Button
-					variant="outlined"
-					color="primary"
-					onClick={login}
-					disabled={pristine || submitting}>
+		<div className={classes.root}>
+			<form
+				noValidate
+				className={classes.loginForm}>
+				<div className={classes.fields}>
+					<Field
+						name="password"
+						label="Enter Password"
+						className={classes.field}
+						component={renderTextField}
+						onChange={passwordChanged}
+					/>
+				</div>
+				<div className={classes.buttons}>
+					<Button
+						variant="contained"
+						color="primary"
+						onClick={login}
+						disabled={pristine || submitting}>
 						Login
-				</Button>
-				<Button
-					variant="outlined"
-					color="secondary"
-					onClick={reset}
-					disabled={pristine || submitting}>
-						Clear Values
-				</Button>
-			</div>
-		</form>
+					</Button>
+				</div>
+			</form>
+		</div>
 	);
 
 	function passwordChanged( event, newValue ){

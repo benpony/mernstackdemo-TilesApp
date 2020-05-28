@@ -1,6 +1,7 @@
 import * as React from "react";
 import ImageUploading from "react-images-uploading";
 import Button from "@material-ui/core/Button";
+import AddIcon from '@material-ui/icons/Add';
 import "./UploadImage.scss";
  
 const maxNumber = 10;
@@ -8,10 +9,9 @@ const maxMbFileSize = 5;
 class UploadImage extends React.Component {
 
   onChange = (imageList) => {
-    console.log(imageList);
     this.props.callback(this.props.imageNumber, imageList);
   };
- 
+
   render() {
     return (
       <ImageUploading
@@ -19,42 +19,31 @@ class UploadImage extends React.Component {
         maxNumber={maxNumber}
         multiple={false}
         maxFileSize={maxMbFileSize}
-        acceptType={["jpg", "gif", "png","jpeg"]}>
+        acceptType={["jpg", "gif", "png","jpeg"]}
+        defaultValue={[]}>
         {({ imageList, onImageUpload, onImageRemoveAll }) => (
-          <div>
-            {!imageList.length ? 
+          <>
+            {!imageList.length && 
               <Button
-                className="actions"
+                className="add-action"
                 variant="outlined"
                 color="primary"
                 onClick={onImageUpload}>
-                  Upload image
-              </Button> : 
-              undefined
+                  <AddIcon className="add-icon">
+                    add
+                  </AddIcon>
+              </Button>
             }
 
             {imageList.map((image) => (
               <div key={image.key}>
                 <img 
                   src={image.dataURL} 
-                  className="inner-image" />
-                <Button
-                  className="actions"
-                  variant="outlined"
-                  color="primary"
-                  onClick={image.onUpdate}>
-                    Update
-                </Button>
-                <Button
-                  className="actions"
-                  variant="outlined"
-                  color="secondary"
-                  onClick={image.onRemove}>
-                    Remove
-                </Button>
+                  className="image"
+                  alt=""/>
               </div>
             ))}
-          </div>
+          </>
         )}
       </ImageUploading>
     );

@@ -1,73 +1,40 @@
 const express = require( "express" );
 const bodyParser= require( "body-parser" );
 const app = express();
-const MongoClient = require( "mongodb" ).MongoClient;
-const _dbUser = "root";
-const _dbPassword = "secretpassword";
-const connectionString =  `mongodb+srv://${_dbUser}:${_dbPassword}@cluster0-zy0ho.mongodb.net/test?retryWrites=true&w=majority`;
-
-// Make sure you place body-parser before your CRUD handlers!
-app.use( bodyParser.urlencoded( { extended: true, limit: "50mb" } ) );
-app.use( bodyParser.json( { limit: "50mb" } ) );
+const secrets = require( "./secrets" );
 
 ( async () => {
+	app.use( bodyParser.urlencoded( { extended: true, limit: "50mb" } ) );
+	app.use( bodyParser.json( { limit: "50mb" } ) );
+	app.use( express.static( "public" ) );
+
+	// Mongo
+	const MongoClient = require( "mongodb" ).MongoClient;
+	const connectionString =  `mongodb+srv://${secrets._dbUser}:${secrets._dbPassword}@cluster0-zy0ho.mongodb.net/test?retryWrites=true&w=majority`;
 	const client = await MongoClient.connect( connectionString,{ 
 		useNewUrlParser: true, 
-		useUnifiedTopology: true 
+		useUnifiedTopology: true,
 	} );
-	const db = client.db( "images_wall" ); 
+	exports.db = client.db( "images_wall" );
 
-	app.get( "/orders", async ( req, res ) => {
-		try {
-			const user = await db.collection( "users" )
-				.find( { uuid: req.query.uuid } )
-				.toArray();
-
-			res.json( { 
-				orders : user && user.length ? user[0].orders : []
-			} ) ;
-		} catch ( e ){
-			console.error ( e );
-		}		
+	// S3
+	const AWS = require( "aws-sdk" );
+	const bluebird = require( "bluebird" ); 
+	AWS.config.update( {
+		accessKeyId: secrets._awsAccesssKeyId,
+		secretAccessKey: secrets._awsSecretAccessKey
 	} );
+	AWS.config.setPromisesDependency( bluebird );
+	exports.s3Bucket = new AWS.S3( { params: { Bucket: secrets._s3bucket } } );
 
-	app.post( "/order", async ( req, res ) => {
-		try {	
-			let user = await db.collection( "users" ).findOneAndUpdate( 
-				{ uuid: req.body.uuid  },
-				{ $addToSet: { orders: req.body.order }  },
-				{ returnNewDocument :true }
-			);
-			
-			if( !user.value ){
-				user = await db.collection( "users" ).insertOne( { 
-					uuid: req.body.uuid,
-					orders: [ req.body.order ]  } );
-			}
+	app.get( "/orders", require ( "./api/controllers/user/get" ).getUser );
 
-			res.json( {
-				message:"Successfully created new order" 
-			} );
-		} catch ( e ){
-			console.error ( e );
-		}
-	} ); 
+	app.post( "/order", require ( "./api/controllers/user/post" ).createOrder ); 
 
-	app.get( "/allOrders", async ( req, res ) => {
-		try {
-			if( req.query.pwd === "mixtilesadmin" ){
-				const users = await db.collection( "users" )
-					.find( )
-					.toArray();
-
-				res.json( { 
-					users : users
-				} ) ;
-			}
-		} catch ( e ){
-			console.error ( e );
-		}		
-	} );
+	app.get( "/allOrders", require ( "./api/controllers/user/getList" ).getUsers );
  
-	app.listen( 3000, console.log( "listening on 3000" ) );
+	const server = app.listen( process.env.PORT || 5000, function () {
+		const port = server.address().port;
+		console.log( `Express is working on port : ${port}` );
+	} );
 } )().catch( console.error );

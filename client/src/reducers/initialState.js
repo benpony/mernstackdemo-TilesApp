@@ -1,9 +1,11 @@
 export default {
 	user:{
-		uuid:null,
-		order:{
+		uuid: null,
+		order: {
 			uuid:null,
 			name:null,
+			date: null,
+			email:null,
 			address:null,
 			images:[]
 		},

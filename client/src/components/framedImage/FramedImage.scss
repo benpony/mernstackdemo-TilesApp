@@ -1,19 +1,96 @@
-.framedImageContainer {
+@import "../index.scss";
+
+.tile {
   position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: box-shadow .3s,
+  background-color .3s,
+  transform .3s,
+  border-color .3s;
+  width: 230px;
+  height: 230px;
+  animation: fade-in .8s;
+  -webkit-animation: fade-in .8s;
+
+  &.unselected{
+    border: 4px dashed #b0b0b0;
+    border-radius: 14px;
+  }
+
+  &.animated{
+    -webkit-animation: fade-in .8s,
+                      shrink-grow 2s ease-out infinite,
+                      pink-highlight 2s ease-out infinite;
+    animation: fade-in .8s,
+              shrink-grow 2s ease-out infinite,
+              pink-highlight 2s ease-out infinite;
+    background-color: hsla(0,0%,100%,.7);
+    box-shadow: 0 4px 16px rgba(0,0,0,.12);
+  }
+
+  .preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    width: 248px;
+    height: 248px;
+    margin-left: -5px;
+    margin-top: -13px;
+    -webkit-animation: fade-in .4s;
+    animation: fade-in .4s;
+
+    .image{
+      position: relative;
+      z-index:0;
+      opacity: 1;
+      height: 100%;
+      margin: 36px 0 0 6px;
+    }  
+  }
+
+  .tileFrame{
+    right: 16px;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    animation: fade-in .4s;
+    -webkit-animation: fade-in .4s;
+ 
+    .frame{         
+      display: flex;
+      justify-content: center;
+      overflow: hidden;
+      height: 264px;
+      margin-top:20px;
+    }
+  }
 }
 
-.frame {
-  border: 1px dotted grey;
-  border-radius: 5px;
-  height: 282px;
-  width:282px;
+.add-action{
+  border: none !important;
+  width: 230px;
+  height: 230px;
+  border-radius: 14px;
 }
 
-.inner-image {
+.add-icon{
+  font-size: 4.5rem !important;
+  color: $pinkColor;
+}
+
+.action-buttons{
   position: absolute;
-  top: 11px;
-  left: 2px;
-  margin: 46px 0 0 0;
-  height: 280px;
-  width: 280px;
+  z-index:99999;
+  top: 20px;
+  left: 14px;
+  
+  button{
+      margin:4px;
+      height:80px;
+  }
 }

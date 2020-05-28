@@ -8,15 +8,10 @@ export const useStyles = makeStyles( ( theme ) => ( {
 	orderForm: {
 		margin: "30px",
 	},
-	fields:{
-		display: "flex",
-		alignItems: "center",
-		justifyContent: "center",
-		margin: theme.spacing( 3 ),
-	},
-	field:{
-		width: 245,
-		margin: theme.spacing( 3 ),
+	textField:{
+		"& input": {
+			minWidth:"260px",
+		}
 	},
 	buttons: {
 		"& > *": {

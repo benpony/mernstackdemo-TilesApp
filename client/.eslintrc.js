@@ -1,5 +1,4 @@
 module.exports = {
- 
     env: {
         es6: true,
         browser: true,
@@ -23,7 +22,7 @@ module.exports = {
         "no-trailing-spaces": "error",
         "no-multi-spaces": "error",
         "react/no-unused-prop-types": 0,
-        "react/prop-types": [1,{ ignore:["dispatch"] }],
+        "react/prop-types": [1,{ ignore:["dispatch","history"] }],
         "react/jsx-uses-react": "error",   
         "react/jsx-uses-vars": "error",
         "react-redux/connect-prefer-named-arguments": 2,

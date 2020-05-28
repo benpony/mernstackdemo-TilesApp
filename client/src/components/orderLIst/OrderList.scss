@@ -1,0 +1,16 @@
+@import "../index.scss";
+
+.OrderListComponent{
+    display: flex;
+    
+    .ordersGrid {
+        padding: 0 30px;
+        width: 100% !important;
+        margin: 0 !important;
+    }
+
+    .gridItem {
+        animation: fadein 3s;
+        -webkit-animation: fadein 3s;
+    }
+}

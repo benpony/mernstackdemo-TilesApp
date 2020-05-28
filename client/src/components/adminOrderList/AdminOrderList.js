@@ -1,42 +1,57 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loadAdminOrders } from "../../actions/adminActions";
 import OrderList from "../orderLIst/OrderList.js";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import SearchIcon from "@material-ui/icons/SearchSharp";
 
-export const useStyles = makeStyles( {
-	root:{},
-	title: {
-		fontSize: 12,
-		fontWeight: "bold",
-		margin: "15px 30px"
-	},
-} );
-
-const AdminOrderList = ( { orders, admin, dispatch } ) => {
-	const classes = useStyles();
-	const getOrders = () => {
-		dispatch( loadAdminOrders( admin ) );
-	};
+const AdminOrderList = ( { admin, dispatch } ) => {
+	const [ _users, setUsers ] = useState( [] );
 
 	useEffect( () => {
-		getOrders();
+		if( admin && admin.users && !admin.users.length ){
+			( async () => dispatch( loadAdminOrders( admin ) ) )();
+		}
 	}, [ admin.adminPassword ] );
 
-	return (
-		<div className={classes.root}>
-			{admin.users.map( user => (
-				<div key={user.uuid}>
-					<Typography
-						className={classes.title}
-						color="textSecondary"
-						gutterBottom>
-							USER ID : {user.uuid}
-					</Typography>
+	useEffect( () => {
+		if( admin && admin.users.length ){
+			setUsers( admin.users );
+		}
+	}, [ admin.users ] );
 
-					<OrderList orders={orders}/>
+	return (
+		<div className="adminOrderListComponent">
+			<Autocomplete
+				className="searchBar"
+				freeSolo
+				options= { _users.map( option => option.uuid ) }
+				onChange={( event, newValue ) => {
+					newValue?
+						setUsers( _users.filter( user => user.uuid === newValue ) ) :
+						setUsers( admin.users );
+				}}
+				renderInput={( params ) => (
+					<TextField
+						{...params}
+						label= {( <SearchIcon/> )}
+						placeholder="Search by user id.."
+						margin="normal"
+						variant="outlined"
+						color="secondary"
+					/>
+				)}
+			/>
+
+			{_users.map( user => (
+				<div key={user.uuid}>
+					<OrderList
+						orders={user.orders}
+						hidePreview={true}
+						hideGestures={true}
+					/>
 				</div>
 			) )}
 		</div>

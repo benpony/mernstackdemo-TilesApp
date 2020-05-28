@@ -6,6 +6,9 @@
   "license": "ISC",
   "author": "Ben Pony",
   "main": "server.js",
+  "engines": {
+    "node": "14.2.0"
+  },
   "scripts": {
     "lint": "eslint ./src --ext .js",
     "debug": "nodemon --inspect server.js",
@@ -14,13 +17,20 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "aws-sdk": "^2.683.0",
+    "bluebird": "^3.7.2",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "mongodb": "^3.5.7"
+    "file-type": "^14.5.0",
+    "fs": "0.0.1-security",
+    "mongodb": "^3.5.7",
+    "multiparty": "^4.2.1",
+    "path": "^0.12.7",
+    "uuid": "^8.1.0"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
     "eslint-plugin-json-format": "^2.0.1",
-    "nodemon": "^2.0.3"
+    "nodemon": "^2.0.4"
   }
 }
