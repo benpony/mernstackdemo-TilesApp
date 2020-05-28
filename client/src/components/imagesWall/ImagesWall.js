@@ -19,20 +19,22 @@ const ImagesWall = ( { user, dispatch, history } ) => {
 	const matches = useMediaQuery( "(min-width:600px)" );
 	const [ images, setImages ] = useState( [ ] );
 
+	const isItemsSelected = array => Array.isArray( array ) && array.length;
+	const isOrderFormComplete = order => order.name && order.address && order.email;
+	const isOrderComplete = images => isItemsSelected( images ) && isOrderFormComplete( user.order );
+
 	const imageSelectionChanged = ( imageNumber, image ) =>{
 		if( isItemsSelected( image ) ){
 			images[imageNumber] = image[0];
 			setImages( [ ...images ] );
 		} else {
-			removeImage( imageNumber );
+			images.splice( imageNumber, 1 );
+			setImages( [ ...images ] );
 		}
-		user.order.images = images;
-		dispatch( userChanged( { ...user } ) );
 	};
 
 	const removeImage = ( imageNumber ) =>{
-		images.splice( imageNumber, 1 );
-		setImages( [ ...images ] );
+		imageSelectionChanged( imageNumber, [] );
 	};
 
 	const submitOrder = () => {
@@ -72,10 +74,6 @@ const ImagesWall = ( { user, dispatch, history } ) => {
 			Order
 		</Button>
 	</> );
-
-	const isItemsSelected = array => Array.isArray( array ) && array.length;
-	const isOrderFormComplete = order => order.name && order.address && order.email;
-	const isOrderComplete = images => isItemsSelected( images ) && isOrderFormComplete( user.order );
 
 	return (
 		<div className={classes.root}>

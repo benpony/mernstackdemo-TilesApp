@@ -23,7 +23,7 @@ const App = ( { user, dispatch } ) => {
 	const { promiseInProgress } = usePromiseTracker( );
 
 	useEffect( () => {
-		( async ()=>{
+		( async () => {
 			const uuid = Cookies.get( "user" );
 			if( !uuid ){
 				Cookies.set( "user", uuidv4(), { expires: 7 } );

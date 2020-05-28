@@ -36,7 +36,7 @@ const OrderCard = ( { order, hidePreview, hideGestures } ) => {
 					</Avatar>
 				}
 				title={order.address}
-				subheader={ order.date && moment( order.date ).format( "MM ddd, YYYY hh:mm:ss a" )}
+				subheader={ order.date && moment( order.date ).format( "ddd, MM, DD, YYYY hh:mm a" )}
 				className={classes.typography}/>
 			{!hidePreview &&
 				<CardMedia
